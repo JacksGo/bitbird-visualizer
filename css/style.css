@@ -1,0 +1,71 @@
+@font-face {
+  font-family: Aileron;
+  src: url('Aileron-Bold.otf');
+}
+
+:root {
+  --fill-color: #ff393a;
+  --back-color: #fff;
+  --vis-size: 40vmin;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  background: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: none;
+}
+
+#container {
+  width: var(--vis-size);
+  height: var(--vis-size);
+  position: relative;
+  background: var(--back-color);
+}
+
+#logo {
+  width: 100%;
+  height: 100%;
+  background: url('../images/bird.svg');
+  background-size: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+}
+
+#spectrum {
+  width: 100%;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: calc( (var(--vis-size) / 16) - 2px );
+  background: var(--fill-color);
+}
+
+#credits {
+  color: white;
+  position: fixed;
+  bottom: 3rem;
+  right: 5rem;
+  font-family: Aileron;
+  font-size: 16px;
+  text-align: center;
+}
+
+#name a {
+  color: white !important;
+  text-decoration: none !important;
+  -webkit-text-stroke: 0.5px white;
+}
+
+#name {
+  font-size: 39px;
+}
