@@ -23,6 +23,6 @@ function draw() {
   }
   average /= data.length;
   let height = (average/255)*100;
-  height = Math.min(height * 1.25, 100);
+  height = Math.min(height * 1.6, 93);
   spectrum.style.height = height+"%";
 }
