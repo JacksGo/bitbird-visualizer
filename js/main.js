@@ -82,7 +82,6 @@ function updateCurrentArtist() {
 document.addEventListener('keydown', (event) => {
   const keyName = event.key;
   let trapped = false;
-  console.log(event);
   if (event.key === 'e' || event.key === '1') {
     updateCurrentArtist();
     document.body.classList.toggle("hide");
