@@ -12,6 +12,7 @@ async function processStream(stream) {
   analyser.fftSize = 32;
   const source = context.createMediaStreamSource(stream);
   source.connect(analyser);
+  document.body.classList.remove("hide");
   requestAnimationFrame(draw);
 }
 
@@ -26,6 +27,12 @@ function draw() {
   let height = (average/255)*100;
   height = Math.min(height * 1.6, 93);
   spectrum.style.height = height+"%";
+}
+
+let date = new Date();
+
+if (date.getMonth() === 4 && date.getDate() === 30 && date.getFullYear() === 2020) {
+  document.getElementById("schedule").classList.remove("hide");
 }
 
 function updateCurrentArtist() {
@@ -65,8 +72,6 @@ function updateCurrentArtist() {
     } else {
       artist = 7;
     }
-  } else if (hour === 17) {
-    artist = 6;
   } else {
     artist = -1;
   }
@@ -83,6 +88,9 @@ document.addEventListener('keydown', (event) => {
     override = !override;
     updateCurrentArtist();
     document.body.classList.toggle("hide");
+  }
+  if (event.key === 's') {
+    document.getElementById("schedule").classList.toggle("hide");
   }
 });
 

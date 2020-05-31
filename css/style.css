@@ -58,10 +58,9 @@ body {
 }
 
 #spectrum {
-  width: 100%;
   position: absolute;
-  left: 0;
-  right: 0;
+  left: 10px;
+  right: 10px;
   bottom: calc( (var(--vis-size) / 16) - 2px );
   background: var(--fill-color);
   transition: bottom 500ms linear;
@@ -124,7 +123,7 @@ body {
   transform: scale(0);
 }
 
-.hide #credits, .hide #schedule {
+.hide #credits, .hide #schedule, #schedule.hide {
   opacity: 0;
 }
 
