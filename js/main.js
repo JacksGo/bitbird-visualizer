@@ -84,13 +84,23 @@ function updateCurrentArtist() {
 
 document.addEventListener('keydown', (event) => {
   const keyName = event.key;
-  if (event.key === 'h') {
+  let trapped = false;
+  if (event.key === 'e' && event.ctrlKey) {
     override = !override;
     updateCurrentArtist();
     document.body.classList.toggle("hide");
+    trapped = true;
   }
-  if (event.key === 's') {
+  if (event.key === 's' && event.ctrlKey) {
     document.getElementById("schedule").classList.toggle("hide");
+    trapped = true;
+  }
+  if (event.key === 'q' && event.ctrlKey) {
+    document.getElementById("help").classList.toggle("hide");
+    trapped = true;
+  }
+  if (trapped) {
+    event.preventDefault();
   }
 });
 

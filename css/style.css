@@ -107,11 +107,11 @@ body {
   transition: color 0.25s linear;
 }
 
-#time {
+.time {
   text-align: left;
 }
 
-#artist {
+.artist {
   text-transform: uppercase;
   font-weight: bold;
   text-align: right;
@@ -122,10 +122,35 @@ body {
   transform: scale(0);
 }
 
-.hide #credits, .hide #schedule, #schedule.hide {
+.hide #credits, .hide #schedule, #schedule.hide, #help.hide {
   opacity: 0;
 }
 
 .hide #spectrum {
   bottom: calc( -1 * var(--vis-size) );
+}
+
+#help {
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-gap: 1rem;
+  position: fixed;
+  bottom: 3rem;
+  left: 5rem;
+  font-family: Aileron;
+  font-size: 14px;
+  color: white;
+  transition: opacity 1s linear;
+}
+
+.key {
+  border: 1px solid white;
+  border-radius: 0.3rem;
+  padding: 0.175rem 0.3rem;
+  display: inline-block;
+}
+
+.action {
+  align-items: center;
+  display: flex;
 }
