@@ -122,7 +122,7 @@ body {
   transform: scale(0);
 }
 
-.hide #credits, .hide #schedule, #schedule.hide, #help.hide {
+.hide #credits, .hide #schedule, .hide #help, #schedule.hide, #help.hide {
   opacity: 0;
 }
 

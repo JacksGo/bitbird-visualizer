@@ -13,6 +13,7 @@ async function processStream(stream) {
   const source = context.createMediaStreamSource(stream);
   source.connect(analyser);
   document.body.classList.remove("hide");
+  checkHideHelp();
   requestAnimationFrame(draw);
 }
 
@@ -29,16 +30,16 @@ function draw() {
   spectrum.style.height = height+"%";
 }
 
-let date = new Date();
+let date = correctDateOffset(new Date());
 
-if (date.getMonth() === 4 && date.getDate() === 30 && date.getFullYear() === 2020) {
+if (date.getUTCMonth() === 4 && date.getUTCDate() === 30 && date.getUTCFullYear() === 2020) {
   document.getElementById("schedule").classList.remove("hide");
 }
 
 function updateCurrentArtist() {
-  let date = new Date();
-  let hour = date.getHours();
-  let minute = date.getMinutes();
+  let date = correctDateOffset(new Date());
+  let hour = date.getUTCHours();
+  let minute = date.getUTCMinutes();
   
   let artist = -1;
   
@@ -75,34 +76,47 @@ function updateCurrentArtist() {
   } else {
     artist = -1;
   }
-  if (!override) {
-    document.getElementById("current-artist").textContent = `[data-artist='${artist}'] { color: var(--fill-color) }`;
-  } else {
-    document.getElementById("current-artist").textContent = ``;
-  }
+  document.getElementById("current-artist").textContent = `[data-artist='${artist}'] { color: var(--fill-color) }`;
 }
 
 document.addEventListener('keydown', (event) => {
   const keyName = event.key;
   let trapped = false;
-  if (event.key === 'e' && event.ctrlKey) {
-    override = !override;
+  console.log(event);
+  if (event.key === 'e' || event.key === '1') {
     updateCurrentArtist();
     document.body.classList.toggle("hide");
     trapped = true;
   }
-  if (event.key === 's' && event.ctrlKey) {
+  if (event.key === 's' || event.key === '2') {
     document.getElementById("schedule").classList.toggle("hide");
     trapped = true;
   }
-  if (event.key === 'q' && event.ctrlKey) {
-    document.getElementById("help").classList.toggle("hide");
+  if (event.key === 'q' || event.key === '3') {
+    let elem = document.getElementById("help");
     trapped = true;
+    elem.classList.toggle("hide");
+    localStorage.setItem('hide_help', elem.classList.contains("hide"));
   }
   if (trapped) {
     event.preventDefault();
   }
 });
+
+// Check local storage to see if the user had the help page hidden last.
+function checkHideHelp() {
+  let data = localStorage.getItem("hide_help");
+  if (data === null || data === 'false') {
+    document.getElementById("help").classList.remove("hide");
+  }
+}
+
+// Convert any date .
+function correctDateOffset(date) {
+  let d = date;
+  d.setMinutes(d.getMinutes() + (d.getTimezoneOffset() * -1));
+  return d;
+}
 
 // Sync updates to the system clock.
 // setTimeout(function(){ 
