@@ -31,7 +31,17 @@ body {
   width: var(--vis-size);
   height: var(--vis-size);
   position: relative;
+  transition: opacity 1s ease 1s, transform 1s ease 1s;
+  overflow: hidden;
+}
+
+#fixed-back {
   background: var(--back-color);
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  bottom: 10px;
 }
 
 #logo {
@@ -54,6 +64,7 @@ body {
   right: 0;
   bottom: calc( (var(--vis-size) / 16) - 2px );
   background: var(--fill-color);
+  transition: bottom 500ms linear;
 }
 
 #credits {
@@ -65,6 +76,7 @@ body {
   font-weight: bold;
   font-size: 16px;
   text-align: center;
+  transition: opacity 1s linear;
 }
 
 #name a {
@@ -90,6 +102,7 @@ body {
   grid-row-gap: 0px;
   font-family: Aileron;
   font-size: 30px;
+  transition: opacity 1s linear;
 }
 
 #schedule div {
@@ -104,4 +117,17 @@ body {
   text-transform: uppercase;
   font-weight: bold;
   text-align: right;
+}
+
+.hide #container {
+  opacity: 0;
+  transform: scale(0);
+}
+
+.hide #credits, .hide #schedule {
+  opacity: 0;
+}
+
+.hide #spectrum {
+  bottom: calc( -1 * var(--vis-size) );
 }

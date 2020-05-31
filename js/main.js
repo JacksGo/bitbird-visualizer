@@ -1,6 +1,7 @@
 navigator.mediaDevices.getUserMedia({ audio: true }).then(processStream);
 
 let analyser = null;
+let override = false;
 const data = new Uint8Array(16);
 
 const spectrum = document.getElementById("spectrum");
@@ -64,9 +65,26 @@ function updateCurrentArtist() {
     } else {
       artist = 7;
     }
+  } else if (hour === 17) {
+    artist = 6;
+  } else {
+    artist = -1;
   }
-  document.getElementById("current-artist").textContent = `[data-artist='${artist}'] { color: var(--fill-color) }`;
+  if (!override) {
+    document.getElementById("current-artist").textContent = `[data-artist='${artist}'] { color: var(--fill-color) }`;
+  } else {
+    document.getElementById("current-artist").textContent = ``;
+  }
 }
+
+document.addEventListener('keydown', (event) => {
+  const keyName = event.key;
+  if (event.key === 'h') {
+    override = !override;
+    updateCurrentArtist();
+    document.body.classList.toggle("hide");
+  }
+});
 
 // Sync updates to the system clock.
 // setTimeout(function(){ 
